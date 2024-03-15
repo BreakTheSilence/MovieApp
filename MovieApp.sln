@@ -4,6 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieAppWpf", "MovieAppWpf\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B46AB2F1-0738-494C-84E2-5D6AA267FB4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBackend", "MovieBackend\MovieBackend.csproj", "{865C841F-A199-43D1-8D4C-3B1004A4E0EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApp.DAL", "MovieApp.DAL\MovieApp.DAL.csproj", "{1E528BD6-C925-4014-892B-977E517EA0A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApp.DAL.Interfaces", "MovieApp.DAL.Interfaces\MovieApp.DAL.Interfaces.csproj", "{B99FCEF5-D879-4CC1-83E8-F5E13FD3A394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBackend.Interfaces", "MovieBackend.Interfaces\MovieBackend.Interfaces.csproj", "{136DCDCB-CE77-4005-8586-C5CC37F21412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +26,21 @@ Global
 		{B46AB2F1-0738-494C-84E2-5D6AA267FB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B46AB2F1-0738-494C-84E2-5D6AA267FB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B46AB2F1-0738-494C-84E2-5D6AA267FB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{865C841F-A199-43D1-8D4C-3B1004A4E0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{865C841F-A199-43D1-8D4C-3B1004A4E0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{865C841F-A199-43D1-8D4C-3B1004A4E0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{865C841F-A199-43D1-8D4C-3B1004A4E0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E528BD6-C925-4014-892B-977E517EA0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E528BD6-C925-4014-892B-977E517EA0A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E528BD6-C925-4014-892B-977E517EA0A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E528BD6-C925-4014-892B-977E517EA0A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B99FCEF5-D879-4CC1-83E8-F5E13FD3A394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99FCEF5-D879-4CC1-83E8-F5E13FD3A394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99FCEF5-D879-4CC1-83E8-F5E13FD3A394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99FCEF5-D879-4CC1-83E8-F5E13FD3A394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{136DCDCB-CE77-4005-8586-C5CC37F21412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136DCDCB-CE77-4005-8586-C5CC37F21412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136DCDCB-CE77-4005-8586-C5CC37F21412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136DCDCB-CE77-4005-8586-C5CC37F21412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

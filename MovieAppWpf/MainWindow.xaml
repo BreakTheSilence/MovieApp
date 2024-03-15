@@ -8,6 +8,9 @@
         Title="MainWindow" >
     <Grid>
         <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="40" Click="ButtonBase_OnClick"/>
-        <Canvas x:Name="MyCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200"/>
+        <Border BorderBrush="Crimson" BorderThickness="1" CornerRadius="8" 
+                Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="MyCanvas" />    
+        </Border>
     </Grid>
 </Window>

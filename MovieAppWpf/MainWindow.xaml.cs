@@ -86,7 +86,7 @@ public partial class MainWindow : Window
     {
         if (_isGenerating)
         {
-            DrawShapesWithSeed(122456);
+            DrawShapesWithSeed(712558);
             _isGenerating = !_isGenerating;
             return;
         }
