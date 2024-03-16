@@ -1,3 +1,4 @@
+using MovieApp.Messaging.Interfaces.Services;
 using MovieBackend.Interfaces.Services;
 
 namespace MovieBackend;
@@ -5,21 +6,20 @@ namespace MovieBackend;
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
-    private readonly IMovieService _movieService;
-    private readonly ICategoryService _categoryService;
 
-    public Worker(ILogger<Worker> logger, IMovieService movieService, ICategoryService categoryService)
+    public Worker(ILogger<Worker> logger, IMessageListener messageListener, 
+        IMessageHandlerService messageHandlerService)
     {
         _logger = logger;
-        _movieService = movieService;
-        _categoryService = categoryService;
+        messageListener.Start(messageHandlerService.HandleRequest);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        stoppingToken.ThrowIfCancellationRequested();
+        
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             await Task.Delay(1000, stoppingToken);
         }
     }

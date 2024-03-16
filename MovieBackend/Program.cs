@@ -1,5 +1,9 @@
 using MovieApp.DAL.Interfaces.Repositories;
 using MovieApp.DAL.Repositories;
+using MovieApp.Messaging;
+using MovieApp.Messaging.Interfaces;
+using MovieApp.Messaging.Interfaces.Services;
+using MovieApp.Messaging.Services;
 using MovieBackend;
 using MovieBackend.Interfaces.Services;
 using MovieBackend.Services;
@@ -11,6 +15,10 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IMovieRepository, MovieRepository>();
         services.AddTransient<IMovieService, MovieService>();
         services.AddTransient<ICategoryService, CategoryService>();
+        services.AddSingleton<IMessageListener, MessageListener>();
+        services.AddSingleton<IRabbitMqConfiguration, RabbitMqConfiguration>();
+        services.AddSingleton<IMessageListener, MessageListener>();
+        services.AddSingleton<IMessageHandlerService, MessageHandlerService>();
         services.AddHostedService<Worker>();
         services.AddWindowsService(options =>
         {

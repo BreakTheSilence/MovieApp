@@ -17,6 +17,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MovieApp.DAL.Interfaces\MovieApp.DAL.Interfaces.csproj" />
       <ProjectReference Include="..\MovieApp.DAL\MovieApp.DAL.csproj" />
+      <ProjectReference Include="..\MovieApp.Messaging\MovieApp.Messaging.csproj" />
       <ProjectReference Include="..\MovieBackend.Interfaces\MovieBackend.Interfaces.csproj" />
     </ItemGroup>
 </Project>
