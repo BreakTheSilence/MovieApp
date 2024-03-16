@@ -14,11 +14,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Crimson">
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0" Text="Movies" FontSize="24"/>
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonBase_OnClick" Height="40" Width="200"/>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="200"
+                    Command="{Binding NavigateToMoviesCommand}"/>
         </Grid>
         
-        <Grid Grid.Row="1" Background="Aqua">
-            <Frame x:Name="MainFrame"/>
+        <Grid Grid.Row="1">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>

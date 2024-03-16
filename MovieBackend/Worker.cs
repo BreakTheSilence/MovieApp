@@ -1,22 +1,25 @@
 using MovieApp.Messaging.Interfaces.Services;
-using MovieBackend.Interfaces.Services;
 
 namespace MovieBackend;
 
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
+    private readonly IMessageListener _messageListener;
+    private readonly IMessageHandlerService _messageHandlerService;
 
     public Worker(ILogger<Worker> logger, IMessageListener messageListener, 
         IMessageHandlerService messageHandlerService)
     {
         _logger = logger;
-        messageListener.Start(messageHandlerService.HandleRequest);
+        _messageListener = messageListener;
+        _messageHandlerService = messageHandlerService;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         stoppingToken.ThrowIfCancellationRequested();
+        _messageListener.Start(_messageHandlerService, stoppingToken);
         
         while (!stoppingToken.IsCancellationRequested)
         {

@@ -5,7 +5,10 @@ using MovieApp.Messaging;
 using MovieApp.Messaging.Interfaces;
 using MovieApp.Messaging.Interfaces.Services;
 using MovieApp.Messaging.Services;
+using MovieAppWpf.Interfaces;
+using MovieAppWpf.Services;
 using MovieAppWpf.ViewModels;
+using MovieAppWpf.Views;
 
 namespace MovieAppWpf;
 
@@ -27,18 +30,24 @@ public partial class App : Application
     
     private void ConfigureServices(IServiceCollection services)
     {
-        // Configure your services here
         services.AddSingleton<IRabbitMqConfiguration, RabbitMqConfiguration>();
+        services.AddSingleton<INavigationService, NavigationService>();
         services.AddTransient<IMessagePublisher, MessagePublisher>();
-        // Add ViewModel registrations
+        
         services.AddTransient<MainViewModel>();
-        // Add other service registrations as needed
+        services.AddTransient<MoviesViewModel>();
+        
+        services.AddSingleton<MainWindow>();
+        
+        services.AddTransient<MoviesView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        MainWindow = _serviceProvider.GetService<MainWindow>();
+        MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+        var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+        MainWindow.DataContext = mainViewModel;
         MainWindow?.Show();
     }
 }

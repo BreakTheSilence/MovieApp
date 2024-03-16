@@ -1,9 +1,14 @@
 ﻿using System.Text;
-using System.Text.Json;
+using System.Text.Json.Serialization;
+using Domain;
+using Domain.DTO;
+using Domain.Models;
 using MovieApp.Messaging.Interfaces;
 using MovieApp.Messaging.Interfaces.Services;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace MovieApp.Messaging.Services;
 
@@ -16,9 +21,9 @@ public class MessagePublisher : IMessagePublisher
         _rabbitMqConfiguration = rabbitMqConfiguration;
     }
 
-    public async Task<string> PublishMovieListRequest(string request)
+    private async Task<string> PublishRequest(string request, int parameter = -1)
     {
-        var factory = new ConnectionFactory() { HostName = _rabbitMqConfiguration.Hostname };
+        var factory = new ConnectionFactory { HostName = _rabbitMqConfiguration.Hostname };
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
@@ -43,13 +48,37 @@ public class MessagePublisher : IMessagePublisher
         properties.CorrelationId = correlationId;
         properties.ReplyTo = replyQueueName;
 
-        var messageBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(request));
+        var messageBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(parameter));
         channel.BasicPublish(
             exchange: "",
-            routingKey: _rabbitMqConfiguration.QueueName,
+            routingKey: request,
             basicProperties: properties,
             body: messageBytes);
 
         return await tcs.Task;
+    }
+
+    public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+    {
+        var response = await PublishRequest(Enums.RequestType.GetAllMovies.ToString());
+        var serialized = JsonConvert.DeserializeObject<IEnumerable<MovieDto>>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
+    }
+
+    public async Task<MovieDetailsDto> GetMovieDetailsAsync(int movieId)
+    {
+        var response = await PublishRequest(Enums.RequestType.GetMovieDetails.ToString(), movieId);
+        var serialized = JsonConvert.DeserializeObject<MovieDetailsDto>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
+    }
+
+    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+    {
+        var response = await PublishRequest(Enums.RequestType.GetCategories.ToString());
+        var serialized = JsonConvert.DeserializeObject<IEnumerable<Category>>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
     }
 }

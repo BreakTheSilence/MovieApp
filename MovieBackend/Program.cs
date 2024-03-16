@@ -18,7 +18,13 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<IMessageListener, MessageListener>();
         services.AddSingleton<IRabbitMqConfiguration, RabbitMqConfiguration>();
         services.AddSingleton<IMessageListener, MessageListener>();
-        services.AddSingleton<IMessageHandlerService, MessageHandlerService>();
+        services.AddSingleton<IMessageHandlerService>(provider =>
+        {
+            var movieService = provider.GetRequiredService<IMovieService>();
+            var categoryService = provider.GetRequiredService<ICategoryService>();
+            return new MessageHandlerService(movieService.GetMovies, movieService.GetMovieById,
+                categoryService.GetCategories);
+        });
         services.AddHostedService<Worker>();
         services.AddWindowsService(options =>
         {

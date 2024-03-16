@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using System.Text.Json;
+using Domain;
 using MovieApp.Messaging.Interfaces;
 using MovieApp.Messaging.Interfaces.Services;
 using RabbitMQ.Client;
@@ -16,24 +16,50 @@ public class MessageListener : IMessageListener
         _rabbitMqConfiguration = rabbitMqConfiguration;
     }
     
-    public void Start(Func<string, string> messageHandler)
+    public void Start(IMessageHandlerService messageHandlerService, CancellationToken stoppingToken)
     {
         var factory = new ConnectionFactory() { HostName = _rabbitMqConfiguration.Hostname };
         var connection = factory.CreateConnection();
+        
+        HandleRequest(connection, Enums.RequestType.GetAllMovies, messageHandlerService);
+        HandleRequest(connection, Enums.RequestType.GetMovieDetails, messageHandlerService);
+        HandleRequest(connection, Enums.RequestType.GetCategories, messageHandlerService);
+
+        while (!stoppingToken.IsCancellationRequested) { }
+    }
+
+    private void HandleRequest(IConnection connection, Enums.RequestType queueName, IMessageHandlerService messageHandlerService)
+    {
         var channel = connection.CreateModel();
 
-        channel.QueueDeclare(queue: _rabbitMqConfiguration.QueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(queue: queueName.ToString(), durable: false, exclusive: false, autoDelete: false, arguments: null);
 
         var consumer = new EventingBasicConsumer(channel);
-        consumer.Received += (model, ea) =>
+        consumer.Received += (_, ea) =>
         {
             var body = ea.Body.ToArray();
             var props = ea.BasicProperties;
             var replyProps = channel.CreateBasicProperties();
             replyProps.CorrelationId = props.CorrelationId;
             var message = Encoding.UTF8.GetString(body);
-            
-            var response = messageHandler(message);
+
+            string response;
+            switch (queueName)
+            {
+                case Enums.RequestType.GetAllMovies:
+                    response = messageHandlerService.HandleAllMoviesRequest();
+                    break;
+                case Enums.RequestType.GetMovieDetails:
+                    if (!int.TryParse(message, out var id)) throw 
+                        new ArgumentOutOfRangeException(message, "Could not parse movie id");
+                    response = messageHandlerService.HandleMovieDetailsRequest(id);
+                    break;
+                case Enums.RequestType.GetCategories:
+                    response = messageHandlerService.HandleAllCategoriesRequest();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(queueName), queueName, null);
+            }
 
             var responseBytes = Encoding.UTF8.GetBytes(response);
             channel.BasicPublish(
@@ -43,9 +69,6 @@ public class MessageListener : IMessageListener
                 body: responseBytes);
         };
 
-        channel.BasicConsume(queue: _rabbitMqConfiguration.QueueName, autoAck: true, consumer: consumer);
-        
-        // TODO cancellation
-        Console.ReadLine();
+        channel.BasicConsume(queue: queueName.ToString(), autoAck: true, consumer: consumer);
     }
 }

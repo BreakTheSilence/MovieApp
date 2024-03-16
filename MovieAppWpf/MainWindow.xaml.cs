@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using MovieApp.Messaging;
 using MovieApp.Messaging.Services;
+using MovieAppWpf.Interfaces;
+using MovieAppWpf.Services;
 
 namespace MovieAppWpf;
 
@@ -9,9 +11,13 @@ namespace MovieAppWpf;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(INavigationService navigationService)
     {
         InitializeComponent();
+        if (navigationService is NavigationService frameNavigationService)
+        {
+            frameNavigationService.Initialize(MainFrame);
+        }
     }
     
     // private void DrawShapesWithSeed(int seed)
@@ -77,10 +83,4 @@ public partial class MainWindow : Window
     //     };
     //     MyCanvas.Children.Add(line);
     // }
-    private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        var conf = new RabbitMqConfiguration();
-        var publisher = new MessagePublisher(conf);
-        var response = await publisher.PublishMovieListRequest("tereTets");
-    }
 }

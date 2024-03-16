@@ -4,5 +4,5 @@ namespace MovieApp.Messaging.Interfaces.Services;
 
 public interface IMessageListener
 {
-    void Start(Func<string, string> messageHandler);
+    void Start(IMessageHandlerService messageHandlerService, CancellationToken stoppingToken);
 }

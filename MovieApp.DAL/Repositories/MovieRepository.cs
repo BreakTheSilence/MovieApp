@@ -7,12 +7,13 @@ public class MovieRepository : IMovieRepository
 {
     public IEnumerable<Movie> GetAllMovies()
     {
-        throw new NotImplementedException();
+        return GenerateMovies();
     }
 
     public Movie GetMovieById(int id)
     {
-        throw new NotImplementedException();
+        var movies = GenerateMovies();
+        return movies.FirstOrDefault(m => m.Id.Equals(id));
     }
 
     private IEnumerable<Movie> GenerateMovies()
