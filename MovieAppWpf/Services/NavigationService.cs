@@ -20,6 +20,7 @@ public class NavigationService : INavigationService
     public void Initialize(Frame frame)
     {
         _mainFrame = frame;
+        Navigate<MoviesViewModel>();
     }
 
     public void Navigate<TViewModel>() where TViewModel : ObservableObject

@@ -18,7 +18,8 @@ public class MoviesViewModel : ObservableObject
 
     private IEnumerable<MovieDto> _allMovies = ArraySegment<MovieDto>.Empty;
     private string _searchText = string.Empty;
-    private List<Category> _selectedCategories;
+    private List<Category> _selectedCategories = new ();
+    private bool _isLoading;
 
     public MoviesViewModel(IMessagePublisher messagePublisher, INavigationService navigationService)
     {
@@ -26,7 +27,7 @@ public class MoviesViewModel : ObservableObject
         _navigationService = navigationService;
         PageLoadedCommand = new AsyncRelayCommand(PageLoaded);
         CategoriesSelectionChangedCommand = new RelayCommand<object>(CategoriesSelectionChanged!);
-        ClearFiltersCommand = new RelayCommand(ClearFilters);
+        ClearFiltersCommand = new RelayCommand(ClearFilters, () => !IsLoading);
         ItemDoubleClickCommand = new RelayCommand<MovieControlViewModel?>(ItemDoubleClick);
     }
     
@@ -43,10 +44,20 @@ public class MoviesViewModel : ObservableObject
         }
     }
 
-    public ICommand PageLoadedCommand { get; }
-    public ICommand CategoriesSelectionChangedCommand { get; }
-    public ICommand ClearFiltersCommand { get; }
-    public ICommand ItemDoubleClickCommand { get; }
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set
+        {
+            SetProperty(ref _isLoading, value);
+            ClearFiltersCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    public AsyncRelayCommand PageLoadedCommand { get; }
+    public RelayCommand<object> CategoriesSelectionChangedCommand { get; }
+    public RelayCommand ClearFiltersCommand { get; }
+    public RelayCommand<MovieControlViewModel?> ItemDoubleClickCommand { get; }
 
     private async Task PageLoaded()
     {
@@ -56,8 +67,10 @@ public class MoviesViewModel : ObservableObject
 
     private async Task LoadMovies()
     {
+        IsLoading = true;
         _allMovies = await _messagePublisher.GetAllMoviesAsync();
         DisplayMovies(_allMovies);
+        IsLoading = false;
     }
 
     private void SetupCategories()

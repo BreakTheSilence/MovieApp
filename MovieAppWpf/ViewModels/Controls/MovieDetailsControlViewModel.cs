@@ -17,8 +17,4 @@ public class MovieDetailsControlViewModel : ObservableObject
         get => _movie;
         set => SetProperty(ref _movie, value);
     }
-
-    public string RatingString => $"Rating: {Movie.Rating}/10";
-    public string YearString => $"Year: {Movie.Year}";
-    public string DescriptionString => $"Description:\n{Movie.Year}";
 }

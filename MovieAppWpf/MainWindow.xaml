@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:MovieAppWpf.ViewModels"
-        mc:Ignorable="d" WindowState="Maximized"
+        mc:Ignorable="d" WindowState="Maximized" d:DesignHeight="1080" d:DesignWidth="1920"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="MainWindow">
     <Grid Background="White">
@@ -12,10 +12,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="Crimson">
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0" Text="Movies" FontSize="24"/>
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="200"
-                    Command="{Binding NavigateToMoviesCommand}"/>
+        <Grid Grid.Row="0" Background="{StaticResource CoalColor}">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0" Text="Movies" FontSize="24" Foreground="White"/>
         </Grid>
         
         <Grid Grid.Row="1">
