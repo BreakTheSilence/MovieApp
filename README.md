@@ -59,5 +59,6 @@ This application is designed incrementally with a focus on read-only views initi
    dotnet run --project MovieAppWpf
 
 
-##Licence
+## Licence
+
 This project is licensed under the [MIT License](LICENSE).
