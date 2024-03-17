@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:MovieAppWpf.ViewModels"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MovieControlViewModel}">
+             xmlns:controls="clr-namespace:MovieAppWpf.ViewModels.Controls"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance controls:MovieControlViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

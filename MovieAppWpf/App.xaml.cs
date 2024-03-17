@@ -36,10 +36,11 @@ public partial class App : Application
         
         services.AddTransient<MainViewModel>();
         services.AddTransient<MoviesViewModel>();
+        services.AddTransient<MovieDetailsViewModel>();
         
         services.AddSingleton<MainWindow>();
-        
         services.AddTransient<MoviesView>();
+        services.AddTransient<MovieDetailsView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)

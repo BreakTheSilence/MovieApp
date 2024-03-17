@@ -7,6 +7,7 @@ using Domain.DTO;
 using Domain.Models;
 using MovieApp.Messaging.Interfaces.Services;
 using MovieAppWpf.Interfaces;
+using MovieAppWpf.ViewModels.Controls;
 
 namespace MovieAppWpf.ViewModels;
 
@@ -26,6 +27,7 @@ public class MoviesViewModel : ObservableObject
         PageLoadedCommand = new AsyncRelayCommand(PageLoaded);
         CategoriesSelectionChangedCommand = new RelayCommand<object>(CategoriesSelectionChanged!);
         ClearFiltersCommand = new RelayCommand(ClearFilters);
+        ItemDoubleClickCommand = new RelayCommand<MovieControlViewModel?>(ItemDoubleClick);
     }
     
     public ObservableCollection<MovieControlViewModel> Movies { get; } = new();
@@ -43,7 +45,8 @@ public class MoviesViewModel : ObservableObject
 
     public ICommand PageLoadedCommand { get; }
     public ICommand CategoriesSelectionChangedCommand { get; }
-    public ICommand ClearFiltersCommand { get; }   
+    public ICommand ClearFiltersCommand { get; }
+    public ICommand ItemDoubleClickCommand { get; }
 
     private async Task PageLoaded()
     {
@@ -78,7 +81,6 @@ public class MoviesViewModel : ObservableObject
                 .Where(movie => _selectedCategories.Any(category => category.Id == movie.Category.Id))
                 .ToList();
         }
-
         
         moviesToDisplay = moviesToDisplay.Where(m => m.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
         
@@ -105,5 +107,11 @@ public class MoviesViewModel : ObservableObject
     {
         SetupCategories();
         SearchText = string.Empty;
+    }
+
+    private void ItemDoubleClick(MovieControlViewModel? movieControlViewModel)
+    {
+        if (movieControlViewModel is null) return;
+        _navigationService.NavigateToMovieDetails(movieControlViewModel.Movie.Id);
     }
 }

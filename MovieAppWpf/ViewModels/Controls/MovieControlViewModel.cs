@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Domain.DTO;
 
-namespace MovieAppWpf.ViewModels;
+namespace MovieAppWpf.ViewModels.Controls;
 
 public class MovieControlViewModel : ObservableObject
 {
@@ -9,6 +9,5 @@ public class MovieControlViewModel : ObservableObject
     {
         Movie = movie;
     }
-
     public MovieDto Movie { get; }
 }

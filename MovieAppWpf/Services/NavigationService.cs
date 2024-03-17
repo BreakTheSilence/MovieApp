@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using MovieAppWpf.Interfaces;
+using MovieAppWpf.ViewModels;
+using MovieAppWpf.Views;
 
 namespace MovieAppWpf.Services;
 
@@ -25,18 +27,24 @@ public class NavigationService : INavigationService
         var viewType = ViewLocator.GetViewTypeForViewModel(typeof(TViewModel));
         var view = (Page)_serviceProvider.GetService(viewType);
 
-        // Получаем ViewModel из DI контейнера.
         var viewModel = _serviceProvider.GetRequiredService<TViewModel>();
 
-        // Устанавливаем DataContext для View.
         view.DataContext = viewModel;
 
-        // Выполняем навигацию.
+        _mainFrame.Navigate(view);
+    }
+
+    public void NavigateToMovieDetails(int movieId)
+    {
+        var view = _serviceProvider.GetRequiredService<MovieDetailsView>();
+        var viewModel = _serviceProvider.GetRequiredService<MovieDetailsViewModel>();
+        viewModel.Initialize(movieId);
+        view.DataContext = viewModel;
         _mainFrame.Navigate(view);
     }
 
     public void GoBack()
     {
-        throw new NotImplementedException();
+        if (_mainFrame.CanGoBack) _mainFrame.GoBack();
     }
 }
