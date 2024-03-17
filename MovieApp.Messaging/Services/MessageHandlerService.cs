@@ -7,11 +7,11 @@ namespace MovieApp.Messaging.Services;
 
 public class MessageHandlerService : IMessageHandlerService
 {
+    private readonly Func<IEnumerable<Category>> _getAllCategories;
     private readonly Func<IEnumerable<Movie>> _getAllMovies;
     private readonly Func<int, Movie> _getMovieById;
-    private readonly Func<IEnumerable<Category>> _getAllCategories;
 
-    public MessageHandlerService(Func<IEnumerable<Movie>> getAllMovies, Func<int, Movie> getMovieById, 
+    public MessageHandlerService(Func<IEnumerable<Movie>> getAllMovies, Func<int, Movie> getMovieById,
         Func<IEnumerable<Category>> getAllCategories)
     {
         _getAllMovies = getAllMovies;
@@ -25,8 +25,7 @@ public class MessageHandlerService : IMessageHandlerService
         var allCategories = _getAllCategories().ToList();
         var allMoviesDto = new List<MovieDto>();
         foreach (var movie in allMovies)
-        {
-            allMoviesDto.Add(new MovieDto()
+            allMoviesDto.Add(new MovieDto
             {
                 Id = movie.Id,
                 Category = allCategories.First(c => c.Id.Equals(movie.CategoryId)),
@@ -34,7 +33,6 @@ public class MessageHandlerService : IMessageHandlerService
                 Title = movie.Title,
                 Year = movie.Year
             });
-        }
         return JsonConvert.SerializeObject(allMoviesDto);
     }
 
@@ -42,8 +40,8 @@ public class MessageHandlerService : IMessageHandlerService
     {
         var movie = _getMovieById(movieId);
         var allCategories = _getAllCategories().ToList();
-        
-        return JsonConvert.SerializeObject(new MovieDetailsDto()
+
+        return JsonConvert.SerializeObject(new MovieDetailsDto
         {
             Id = movie.Id,
             Category = allCategories.First(c => c.Id.Equals(movie.CategoryId)),

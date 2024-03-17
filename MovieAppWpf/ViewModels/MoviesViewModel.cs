@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Domain.DTO;
@@ -17,9 +16,9 @@ public class MoviesViewModel : ObservableObject
     private readonly INavigationService _navigationService;
 
     private IEnumerable<MovieDto> _allMovies = ArraySegment<MovieDto>.Empty;
-    private string _searchText = string.Empty;
-    private List<Category> _selectedCategories = new ();
     private bool _isLoading;
+    private string _searchText = string.Empty;
+    private List<Category> _selectedCategories = new();
 
     public MoviesViewModel(IMessagePublisher messagePublisher, INavigationService navigationService)
     {
@@ -30,7 +29,7 @@ public class MoviesViewModel : ObservableObject
         ClearFiltersCommand = new RelayCommand(ClearFilters, () => !IsLoading);
         ItemDoubleClickCommand = new RelayCommand<MovieControlViewModel?>(ItemDoubleClick);
     }
-    
+
     public ObservableCollection<MovieControlViewModel> Movies { get; } = new();
     public ObservableCollection<Category> Categories { get; } = new();
 
@@ -89,14 +88,13 @@ public class MoviesViewModel : ObservableObject
     {
         var moviesToDisplay = _allMovies.ToList();
         if (_selectedCategories.Any())
-        {
             moviesToDisplay = moviesToDisplay
                 .Where(movie => _selectedCategories.Any(category => category.Id == movie.Category.Id))
                 .ToList();
-        }
-        
-        moviesToDisplay = moviesToDisplay.Where(m => m.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
-        
+
+        moviesToDisplay = moviesToDisplay.Where(m => m.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
         DisplayMovies(moviesToDisplay);
     }
 
@@ -110,10 +108,7 @@ public class MoviesViewModel : ObservableObject
     private void DisplayMovies(IEnumerable<MovieDto> moviesToDisplay)
     {
         Movies.Clear();
-        foreach (var movie in moviesToDisplay)
-        {
-            Movies.Add(new MovieControlViewModel(movie));
-        }
+        foreach (var movie in moviesToDisplay) Movies.Add(new MovieControlViewModel(movie));
     }
 
     private void ClearFilters()

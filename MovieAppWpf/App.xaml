@@ -32,39 +32,32 @@
                             <ContentPresenter TextBlock.Foreground="{TemplateBinding Foreground}" />
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-
-                                    </VisualState>
+                                    <VisualState Name="Normal" />
                                     <VisualState Name="MouseOver">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.02" To="#E6E6E6">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.02" To="#E6E6E6" />
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.02" To="#ADADAD">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.02" To="#ADADAD" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState Name="Pressed">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.02" To="#d4d4d4">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.02" To="#d4d4d4" />
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.02" To="#8c8c8c">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.02" To="#8c8c8c" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState Name="Disabled">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="container"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="0:0:0.02" To="0.8">
-                                            </DoubleAnimation>
+                                                             Duration="0:0:0.02" To="0.8" />
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -83,7 +76,7 @@
                         <Grid>
                             <Border Name="bd" BorderThickness="1" CornerRadius="4" BorderBrush="#66afe9" Opacity="0">
                                 <Border.Effect>
-                                    <BlurEffect></BlurEffect>
+                                    <BlurEffect />
 
                                 </Border.Effect>
                             </Border>
@@ -96,25 +89,22 @@
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup>
-                                    <VisualState Name="Normal"></VisualState>
+                                    <VisualState Name="Normal" />
                                     <VisualState Name="Focused">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.05" To="#66afe9">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.05" To="#66afe9" />
                                             <DoubleAnimation Storyboard.TargetName="bd"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="0:0:0.05" To="1">
-                                            </DoubleAnimation>
+                                                             Duration="0:0:0.05" To="1" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState Name="Disabled">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="container"
                                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.05" To="#eee">
-                                            </ColorAnimation>
+                                                            Duration="0:0:0.05" To="#eee" />
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -163,7 +153,7 @@
             </Setter>
         </Style>
         <Style TargetType="ListBox">
-            <Setter Property="BorderBrush" Value="#dddddd"></Setter>
+            <Setter Property="BorderBrush" Value="#dddddd" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -172,7 +162,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                             <ScrollViewer CanContentScroll="False" Padding="0" HorizontalScrollBarVisibility="Disabled"
                                           VerticalScrollBarVisibility="Auto">
-                                <ItemsPresenter ClipToBounds="True"></ItemsPresenter>
+                                <ItemsPresenter ClipToBounds="True" />
                             </ScrollViewer>
                         </Border>
                     </ControlTemplate>
@@ -199,7 +189,7 @@
                                                        HorizontalAlignment="Left" Margin="-100,0,0,0" Width="100" />
                                         </Grid>
                                         <Grid x:Name="Overlay">
-                                            <Rectangle Fill="{TemplateBinding Foreground}"></Rectangle>
+                                            <Rectangle Fill="{TemplateBinding Foreground}" />
                                         </Grid>
                                     </Grid>
                                 </Decorator>

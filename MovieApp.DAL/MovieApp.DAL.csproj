@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MovieApp.DAL.Interfaces\MovieApp.DAL.Interfaces.csproj" />
+        <ProjectReference Include="..\MovieApp.DAL.Interfaces\MovieApp.DAL.Interfaces.csproj"/>
     </ItemGroup>
 
 </Project>

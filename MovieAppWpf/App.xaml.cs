@@ -13,12 +13,12 @@ using MovieAppWpf.Views;
 namespace MovieAppWpf;
 
 /// <summary>
-/// Interaction logic for App.xaml
+///     Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
     private readonly IServiceProvider _serviceProvider;
-    
+
     public App()
     {
         var services = new ServiceCollection();
@@ -27,17 +27,17 @@ public partial class App : Application
 
         Ioc.Default.ConfigureServices(_serviceProvider);
     }
-    
+
     private void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<IRabbitMqConfiguration, RabbitMqConfiguration>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddTransient<IMessagePublisher, MessagePublisher>();
-        
+
         services.AddTransient<MainViewModel>();
         services.AddTransient<MoviesViewModel>();
         services.AddTransient<MovieDetailsViewModel>();
-        
+
         services.AddSingleton<MainWindow>();
         services.AddTransient<MoviesView>();
         services.AddTransient<MovieDetailsView>();

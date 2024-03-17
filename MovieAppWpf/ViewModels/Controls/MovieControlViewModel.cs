@@ -9,5 +9,6 @@ public class MovieControlViewModel : ObservableObject
     {
         Movie = movie;
     }
+
     public MovieDto Movie { get; }
 }

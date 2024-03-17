@@ -5,10 +5,10 @@ namespace MovieBackend;
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
-    private readonly IMessageListener _messageListener;
     private readonly IMessageHandlerService _messageHandlerService;
+    private readonly IMessageListener _messageListener;
 
-    public Worker(ILogger<Worker> logger, IMessageListener messageListener, 
+    public Worker(ILogger<Worker> logger, IMessageListener messageListener,
         IMessageHandlerService messageHandlerService)
     {
         _logger = logger;
@@ -20,10 +20,7 @@ public class Worker : BackgroundService
     {
         stoppingToken.ThrowIfCancellationRequested();
         _messageListener.Start(_messageHandlerService, stoppingToken);
-        
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            await Task.Delay(1000, stoppingToken);
-        }
+
+        while (!stoppingToken.IsCancellationRequested) await Task.Delay(1000, stoppingToken);
     }
 }

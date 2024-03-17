@@ -1,6 +1,4 @@
-﻿using RabbitMQ.Client.Events;
-
-namespace MovieApp.Messaging.Interfaces.Services;
+﻿namespace MovieApp.Messaging.Interfaces.Services;
 
 public interface IMessageListener
 {

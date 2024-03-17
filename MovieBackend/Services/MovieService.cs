@@ -12,7 +12,7 @@ public class MovieService : IMovieService
     {
         _movieRepository = movieRepository;
     }
-    
+
     public IEnumerable<Movie> GetMovies()
     {
         return _movieRepository.GetAllMovies();

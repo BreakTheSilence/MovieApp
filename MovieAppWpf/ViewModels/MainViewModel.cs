@@ -4,7 +4,4 @@ namespace MovieAppWpf.ViewModels;
 
 public class MainViewModel : ObservableObject
 {
-    public MainViewModel()
-    {
-    }
 }

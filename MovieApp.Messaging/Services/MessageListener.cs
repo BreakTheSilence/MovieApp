@@ -15,24 +15,27 @@ public class MessageListener : IMessageListener
     {
         _rabbitMqConfiguration = rabbitMqConfiguration;
     }
-    
+
     public void Start(IMessageHandlerService messageHandlerService, CancellationToken stoppingToken)
     {
-        var factory = new ConnectionFactory() { HostName = _rabbitMqConfiguration.Hostname };
+        var factory = new ConnectionFactory { HostName = _rabbitMqConfiguration.Hostname };
         var connection = factory.CreateConnection();
-        
+
         HandleRequest(connection, Enums.RequestType.GetAllMovies, messageHandlerService);
         HandleRequest(connection, Enums.RequestType.GetMovieDetails, messageHandlerService);
         HandleRequest(connection, Enums.RequestType.GetCategories, messageHandlerService);
 
-        while (!stoppingToken.IsCancellationRequested) { }
+        while (!stoppingToken.IsCancellationRequested)
+        {
+        }
     }
 
-    private void HandleRequest(IConnection connection, Enums.RequestType queueName, IMessageHandlerService messageHandlerService)
+    private void HandleRequest(IConnection connection, Enums.RequestType queueName,
+        IMessageHandlerService messageHandlerService)
     {
         var channel = connection.CreateModel();
 
-        channel.QueueDeclare(queue: queueName.ToString(), durable: false, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(queueName.ToString(), false, false, false, null);
 
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += (_, ea) =>
@@ -50,8 +53,9 @@ public class MessageListener : IMessageListener
                     response = messageHandlerService.HandleAllMoviesRequest();
                     break;
                 case Enums.RequestType.GetMovieDetails:
-                    if (!int.TryParse(message, out var id)) throw 
-                        new ArgumentOutOfRangeException(message, "Could not parse movie id");
+                    if (!int.TryParse(message, out var id))
+                        throw
+                            new ArgumentOutOfRangeException(message, "Could not parse movie id");
                     response = messageHandlerService.HandleMovieDetailsRequest(id);
                     break;
                 case Enums.RequestType.GetCategories:
@@ -63,12 +67,12 @@ public class MessageListener : IMessageListener
 
             var responseBytes = Encoding.UTF8.GetBytes(response);
             channel.BasicPublish(
-                exchange: "",
-                routingKey: props.ReplyTo,
-                basicProperties: replyProps,
-                body: responseBytes);
+                "",
+                props.ReplyTo,
+                replyProps,
+                responseBytes);
         };
 
-        channel.BasicConsume(queue: queueName.ToString(), autoAck: true, consumer: consumer);
+        channel.BasicConsume(queueName.ToString(), true, consumer);
     }
 }

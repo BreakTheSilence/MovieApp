@@ -7,19 +7,13 @@ namespace MovieAppWpf.Controls;
 
 public partial class MovieImageGeneratorControl : UserControl
 {
+    public static readonly DependencyProperty SeedProperty = DependencyProperty.Register(
+        nameof(Seed), typeof(int), typeof(MovieImageGeneratorControl),
+        new PropertyMetadata(default(int), OnSeedPropertyChanged));
+
     public MovieImageGeneratorControl()
     {
         InitializeComponent();
-    }
-
-    public static readonly DependencyProperty SeedProperty = DependencyProperty.Register(
-        nameof(Seed), typeof(int), typeof(MovieImageGeneratorControl), new PropertyMetadata(default(int), OnSeedPropertyChanged));
-
-    private static void OnSeedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var control = (MovieImageGeneratorControl)d;
-        var seed = (int)e.NewValue;
-        control.DrawShapesWithSeed(seed);
     }
 
     public int Seed
@@ -28,11 +22,17 @@ public partial class MovieImageGeneratorControl : UserControl
         set => SetValue(SeedProperty, value);
     }
 
+    private static void OnSeedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var control = (MovieImageGeneratorControl)d;
+        var seed = (int)e.NewValue;
+        control.DrawShapesWithSeed(seed);
+    }
+
     private void DrawShapesWithSeed(int seed)
     {
         var rand = new Random(seed);
-        for (int i = 0; i < 5; i++)
-        {
+        for (var i = 0; i < 5; i++)
             switch (rand.Next(3))
             {
                 case 0:
@@ -45,7 +45,6 @@ public partial class MovieImageGeneratorControl : UserControl
                     DrawLine(rand);
                     break;
             }
-        }
     }
 
     private void DrawRectangle(Random rand)

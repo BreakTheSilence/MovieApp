@@ -11,11 +11,11 @@ public class MovieDetailsViewModel : ObservableObject
 {
     private readonly IMessagePublisher _messagePublisher;
     private readonly INavigationService _navigationService;
-
-    private int _movieId;
     private MovieDetailsControlViewModel _movieDetailsControlViewModel;
 
-    public MovieDetailsViewModel(IMessagePublisher messagePublisher, 
+    private int _movieId;
+
+    public MovieDetailsViewModel(IMessagePublisher messagePublisher,
         INavigationService navigationService)
     {
         _messagePublisher = messagePublisher;
@@ -23,7 +23,7 @@ public class MovieDetailsViewModel : ObservableObject
         PageLoadedCommand = new AsyncRelayCommand(PageLoaded);
         GoBackCommand = new RelayCommand(GoBack);
     }
-    
+
     public ICommand PageLoadedCommand { get; }
     public ICommand GoBackCommand { get; }
 
@@ -37,7 +37,7 @@ public class MovieDetailsViewModel : ObservableObject
     {
         _movieId = movieId;
     }
-    
+
     private async Task PageLoaded()
     {
         var movieDto = await _messagePublisher.GetMovieDetailsAsync(_movieId);

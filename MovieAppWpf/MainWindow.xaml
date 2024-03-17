@@ -9,15 +9,16 @@
         Title="MainWindow">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{StaticResource CoalColor}">
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0" Text="Movies" FontSize="24" Foreground="White"/>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20, 0" Text="Movies" FontSize="24"
+                       Foreground="White" />
         </Grid>
-        
+
         <Grid Grid.Row="1">
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>
 </Window>

@@ -8,48 +8,51 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MovieDetailsControlViewModel}"
              d:DesignHeight="540" d:DesignWidth="960">
     <Border Background="{StaticResource Periwinkle}" CornerRadius="8">
-        <Grid >
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0" Background="{StaticResource SilverLake}">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Movie.Title}"
-                           FontSize="26" FontWeight="Bold" Margin="20, 0" Foreground="White"/>
+                           FontSize="26" FontWeight="Bold" Margin="20, 0" Foreground="White" />
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
                            FontSize="18" Margin="20, 0" Foreground="White">
-                    <Run Text="{Binding Movie.Rating}"/>
-                    <Run Text="/10"/>
+                    <Run Text="{Binding Movie.Rating}" />
+                    <Run Text="/10" />
                 </TextBlock>
             </Grid>
-            <Grid Grid.Row="1"><Separator/></Grid>
-            
+            <Grid Grid.Row="1">
+                <Separator />
+            </Grid>
+
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-                
-                <Grid Grid.Column="0" >
-                    <Border Height="155" Width="155" BorderBrush="{StaticResource Battleship}" BorderThickness="3" CornerRadius="4" 
+
+                <Grid Grid.Column="0">
+                    <Border Height="155" Width="155" BorderBrush="{StaticResource Battleship}" BorderThickness="3"
+                            CornerRadius="4"
                             VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20, 10">
-                        <controls:MovieImageGeneratorControl Seed="{Binding Movie.Id, Mode=OneWay}"/>
+                        <controls:MovieImageGeneratorControl Seed="{Binding Movie.Id, Mode=OneWay}" />
                     </Border>
                 </Grid>
-                
+
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Vertical" Margin="10, 0">
                         <TextBlock FontSize="16">
-                            <Run Text="Year: "/>
-                            <Run Text="{Binding Movie.Year}" FontWeight="SemiBold"/>
+                            <Run Text="Year: " />
+                            <Run Text="{Binding Movie.Year}" FontWeight="SemiBold" />
                         </TextBlock>
-                        <TextBlock FontSize="16">
-                            <Run Text="Description: "/>
-                            <LineBreak/>
-                            <Run Text="{Binding Movie.Description}" FontWeight="SemiBold"/>
-                        </TextBlock>                    
+                        <TextBlock FontSize="16" TextWrapping="Wrap">
+                            <Run Text="Description: " />
+                            <LineBreak />
+                            <Run Text="{Binding Movie.Description}" FontWeight="SemiBold" />
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>

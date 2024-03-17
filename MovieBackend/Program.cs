@@ -26,10 +26,7 @@ var host = Host.CreateDefaultBuilder(args)
                 categoryService.GetCategories);
         });
         services.AddHostedService<Worker>();
-        services.AddWindowsService(options =>
-        {
-            options.ServiceName = "MovieApp Windows Service";
-        });
+        services.AddWindowsService(options => { options.ServiceName = "MovieApp Windows Service"; });
     })
     .Build();
 

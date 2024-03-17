@@ -6,7 +6,6 @@
       xmlns:viewModels="clr-namespace:MovieAppWpf.ViewModels"
       xmlns:controls="clr-namespace:MovieAppWpf.Controls"
       xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:system="clr-namespace:System;assembly=System.Runtime"
       mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MoviesViewModel}"
       Title="MoviesView" d:DesignWidth="1920" d:DesignHeight="1080">
     <b:Interaction.Triggers>
@@ -29,13 +28,13 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="{StaticResource FrenchGray}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBox Width="150" Padding="3" 
+                        <TextBox Width="150" Padding="3"
                                  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}, Mode=OneWay}" />
-                        
-                        <Button Content="Search"/>
+
+                        <Button Content="Search" />
                     </StackPanel>
-                    
+
                 </Grid>
 
                 <Grid Grid.Row="1" Background="{StaticResource Periwinkle}">
@@ -50,7 +49,7 @@
                         </b:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -58,7 +57,7 @@
 
                 <Grid Grid.Row="2" Background="{StaticResource FrenchGray}">
                     <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="Clear Filters"
-                            Margin="15, 0" Padding="3" Command="{Binding ClearFiltersCommand}" />
+                            Margin="15, 0" Padding="10" Command="{Binding ClearFiltersCommand}" />
                 </Grid>
             </Grid>
         </Grid>
@@ -67,7 +66,7 @@
             <ProgressBar IsIndeterminate="True" Height="40" VerticalAlignment="Bottom"
                          Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-            <ListView ItemsSource="{Binding Movies, Mode=OneWay}" Width="330"
+            <ListView ItemsSource="{Binding Movies, Mode=OneWay}" Width="450"
                       BorderThickness="0"
                       HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -77,10 +76,15 @@
                                                CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="{StaticResource SilverLake}" BorderThickness="3" CornerRadius="4">
-                            <controls:MovieControl DataContext="{Binding}" Width="300" Height="80" />
+                            <controls:MovieControl DataContext="{Binding}" Width="400" Height="80" />
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>

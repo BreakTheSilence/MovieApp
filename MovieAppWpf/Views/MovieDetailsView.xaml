@@ -11,20 +11,21 @@
       Title="MovieDetailsView" d:DesignHeight="450" d:DesignWidth="800">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding PageLoadedCommand}"/>
+            <b:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Page.Resources>
         <DataTemplate DataType="{x:Type pages:MovieDetailsControlViewModel}">
-            <controls:MovieDetailsControl/>
+            <controls:MovieDetailsControl />
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ContentPresenter Content="{Binding MovieDetailsControlViewModel, Mode=OneWay}" Width="600" Height="350" 
-                          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20"/>
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="20" Padding="5" 
+        <ContentPresenter Content="{Binding MovieDetailsControlViewModel, Mode=OneWay}" Width="600" Height="350"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" />
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Padding="5"
                 Command="{Binding GoBackCommand}" Width="70" Height="50">
-            <TextBlock Text="Back" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            <TextBlock Text="Back" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"
+                       FontSize="20" />
         </Button>
     </Grid>
 </Page>

@@ -12,7 +12,7 @@ public class CategoryService : ICategoryService
     {
         _categoryRepository = categoryRepository;
     }
-    
+
     public IEnumerable<Category> GetCategories()
     {
         return _categoryRepository.GetAllCategories();

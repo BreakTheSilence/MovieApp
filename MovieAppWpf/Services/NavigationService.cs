@@ -17,12 +17,6 @@ public class NavigationService : INavigationService
         _serviceProvider = serviceProvider;
     }
 
-    public void Initialize(Frame frame)
-    {
-        _mainFrame = frame;
-        Navigate<MoviesViewModel>();
-    }
-
     public void Navigate<TViewModel>() where TViewModel : ObservableObject
     {
         var viewType = ViewLocator.GetViewTypeForViewModel(typeof(TViewModel));
@@ -47,5 +41,11 @@ public class NavigationService : INavigationService
     public void GoBack()
     {
         if (_mainFrame.CanGoBack) _mainFrame.GoBack();
+    }
+
+    public void Initialize(Frame frame)
+    {
+        _mainFrame = frame;
+        Navigate<MoviesViewModel>();
     }
 }

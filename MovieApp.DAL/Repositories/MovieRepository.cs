@@ -18,215 +18,269 @@ public class MovieRepository : IMovieRepository
 
     private IEnumerable<Movie> GenerateMovies()
     {
-        return new List<Movie>()
+        return new List<Movie>
         {
-            new Movie
+            new()
             {
-                Id = 1, Title = "Movie1", Description = "Description1 for Movie1 that was released in 2003",
+                Id = 1, Title = "The Echo of Time",
+                Description = "A journey through the echoes of time, revealing untold stories from 2003.",
                 Year = 2003,
                 Rating = 5, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 2, Title = "Movie2", Description = "Description2 for Movie2 that was released in 1964",
+                Id = 2, Title = "Shadows of 1964",
+                Description =
+                    "Unveiling the shadows that lingered over the year 1964, a story of resilience and revolution.",
                 Year = 1964,
                 Rating = 4, CategoryId = 10
             },
-            new Movie
+            new()
             {
-                Id = 3, Title = "Movie3", Description = "Description3 for Movie3 that was released in 1955",
+                Id = 3, Title = "Whispers from 1955",
+                Description = "In 1955, whispers among the winds tell a tale of discovery and destiny.",
                 Year = 1955,
                 Rating = 4, CategoryId = 10
             },
-            new Movie
+            new()
             {
-                Id = 4, Title = "Movie4", Description = "Description4 for Movie4 that was released in 1993",
+                Id = 4, Title = "Dreams of '93",
+                Description =
+                    "1993: A year of dreams, challenges, and achievements. An inspiring tale of perseverance.",
                 Year = 1993,
                 Rating = 10, CategoryId = 9
             },
-            new Movie
+            new()
             {
-                Id = 5, Title = "Movie5", Description = "Description5 for Movie5 that was released in 1956",
+                Id = 5, Title = "Renaissance of 1956",
+                Description = "The year 1956 brought a renaissance of art and expression, changing lives forever.",
                 Year = 1956,
                 Rating = 5, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 6, Title = "Movie6", Description = "Description6 for Movie6 that was released in 1995",
+                Id = 6, Title = "Echoes of 1995",
+                Description = "A look back at 1995, exploring the echoes of the past that shaped the future.",
                 Year = 1995,
                 Rating = 9, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 7, Title = "Movie7", Description = "Description7 for Movie7 that was released in 1952",
+                Id = 7, Title = "The Forgotten Year",
+                Description = "1952: A forgotten year with stories that shaped the world in unseen ways.",
                 Year = 1952,
                 Rating = 1, CategoryId = 9
             },
-            new Movie
+            new()
             {
-                Id = 8, Title = "Movie8", Description = "Description8 for Movie8 that was released in 1992",
+                Id = 8, Title = "Whirlwind of 1992",
+                Description = "1992: A year of whirlwind changes, from the personal to the global scale.",
                 Year = 1992,
                 Rating = 8, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 9, Title = "Movie9", Description = "Description9 for Movie9 that was released in 1959",
+                Id = 9, Title = "Twilight of 1959",
+                Description = "The twilight of 1959 brought forth changes that would echo through the ages.",
                 Year = 1959,
                 Rating = 2, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 10, Title = "Movie10", Description = "Description10 for Movie10 that was released in 1997",
+                Id = 10, Title = "Beyond the Horizon",
+                Description = "1997: A tale of exploration and discovery, reaching beyond the known horizons.",
                 Year = 1997, Rating = 5, CategoryId = 4
             },
-            new Movie
+            new()
             {
-                Id = 11, Title = "Movie11", Description = "Description11 for Movie11 that was released in 1981",
+                Id = 11, Title = "Shadows and Light",
+                Description = "1981: A dance of shadows and light, revealing the dual nature of humanity.",
                 Year = 1981, Rating = 6, CategoryId = 4
             },
-            new Movie
+            new()
             {
-                Id = 12, Title = "Movie12", Description = "Description12 for Movie12 that was released in 1976",
+                Id = 12, Title = "The Vintage Year",
+                Description = "1976: A vintage year that brewed revolutions in hearts and societies alike.",
                 Year = 1976, Rating = 4, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 13, Title = "Movie13", Description = "Description13 for Movie13 that was released in 1991",
+                Id = 13, Title = "Winds of Change",
+                Description = "The winds of 1991 brought change, sweeping across the world in waves of liberation.",
                 Year = 1991, Rating = 7, CategoryId = 5
             },
-            new Movie
+            new()
             {
-                Id = 14, Title = "Movie14", Description = "Description14 for Movie14 that was released in 1952",
+                Id = 14, Title = "Echoes of the Forgotten",
+                Description = "1952 revisited: Unearthing the echoes of the forgotten stories and souls.",
                 Year = 1952, Rating = 2, CategoryId = 5
             },
-            new Movie
+            new()
             {
-                Id = 15, Title = "Movie15", Description = "Description15 for Movie15 that was released in 1957",
+                Id = 15, Title = "The Year We Remember",
+                Description = "1957: A year we remember not for events, but for the emotions it stirred.",
                 Year = 1957, Rating = 4, CategoryId = 2
             },
-            new Movie
+            new()
             {
-                Id = 16, Title = "Movie16", Description = "Description16 for Movie16 that was released in 1958",
+                Id = 16, Title = "Silent Echoes",
+                Description = "1958: A year of silent echoes, whispering the truths of a world in flux.",
                 Year = 1958, Rating = 1, CategoryId = 9
             },
-            new Movie
+            new()
             {
-                Id = 17, Title = "Movie17", Description = "Description17 for Movie17 that was released in 2018",
+                Id = 17, Title = "New Dawns",
+                Description = "2018: Marking new dawns and the beginning of eras yet to be defined.",
                 Year = 2018, Rating = 3, CategoryId = 2
             },
-            new Movie
+            new()
             {
-                Id = 18, Title = "Movie18", Description = "Description18 for Movie18 that was released in 1988",
+                Id = 18, Title = "Era of Echoes",
+                Description = "1988: An era where the echoes of the past met the whispers of the future.",
                 Year = 1988, Rating = 6, CategoryId = 1
             },
-            new Movie
+            new()
             {
-                Id = 19, Title = "Movie19", Description = "Description19 for Movie19 that was released in 2013",
+                Id = 19, Title = "Whispers of Tomorrow",
+                Description = "2013: A year of whispers, gently shaping the contours of tomorrow.",
                 Year = 2013, Rating = 1, CategoryId = 7
             },
-            new Movie
+            new()
             {
-                Id = 20, Title = "Movie20", Description = "Description20 for Movie20 that was released in 1991",
+                Id = 20, Title = "The Unseen Journey",
+                Description = "1991: An unseen journey through the depths of the human spirit and the world around us.",
                 Year = 1991, Rating = 0, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 21, Title = "Movie21", Description = "Description21 for Movie21 that was released in 1965",
+                Id = 21, Title = "Tales of 1965",
+                Description = "The tales of 1965, a year that wove together stories of hope, struggle, and change.",
                 Year = 1965, Rating = 4, CategoryId = 10
             },
-            new Movie
+            new()
             {
-                Id = 22, Title = "Movie22", Description = "Description22 for Movie22 that was released in 1995",
+                Id = 22, Title = "Moments of 1995",
+                Description = "Exploring the significant moments that defined the year 1995 and its legacy.",
                 Year = 1995, Rating = 1, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 23, Title = "Movie23", Description = "Description23 for Movie23 that was released in 1986",
+                Id = 23, Title = "Chronicles of 1986",
+                Description =
+                    "A vivid chronicle of 1986, capturing the essence of an era filled with innovation and conflict.",
                 Year = 1986, Rating = 8, CategoryId = 1
             },
-            new Movie
+            new()
             {
-                Id = 24, Title = "Movie24", Description = "Description24 for Movie24 that was released in 1986",
+                Id = 24, Title = "The Silent Echo",
+                Description = "1986: A year that resonated with the silent echo of change, felt across generations.",
                 Year = 1986, Rating = 0, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 25, Title = "Movie25", Description = "Description25 for Movie25 that was released in 1974",
+                Id = 25, Title = "The Lasting Impression",
+                Description =
+                    "1974: A year that left a lasting impression on the fabric of society, unraveling tales of hope.",
                 Year = 1974, Rating = 10, CategoryId = 10
             },
-            new Movie
+            new()
             {
-                Id = 26, Title = "Movie26", Description = "Description26 for Movie26 that was released in 1982",
+                Id = 26, Title = "Reflections of 1982",
+                Description =
+                    "Delving into the reflections of 1982, a year that mirrored the complexities of the human experience.",
                 Year = 1982, Rating = 5, CategoryId = 5
             },
-            new Movie
+            new()
             {
-                Id = 27, Title = "Movie27", Description = "Description27 for Movie27 that was released in 1953",
+                Id = 27, Title = "Forgotten Voices",
+                Description = "1953: Unearthing the forgotten voices that whispered the truths of their time.",
                 Year = 1953, Rating = 0, CategoryId = 1
             },
-            new Movie
+            new()
             {
-                Id = 28, Title = "Movie28", Description = "Description28 for Movie28 that was released in 2013",
+                Id = 28, Title = "A New Dawn",
+                Description = "2013: Witnessing the birth of a new dawn, challenging the norms and embracing change.",
                 Year = 2013, Rating = 7, CategoryId = 2
             },
-            new Movie
+            new()
             {
-                Id = 29, Title = "Movie29", Description = "Description29 for Movie29 that was released in 1962",
+                Id = 29, Title = "Rising from Ashes",
+                Description =
+                    "1962: The year the world rose from the ashes, marking a new chapter of resilience and rebirth.",
                 Year = 1962, Rating = 9, CategoryId = 1
             },
-            new Movie
+            new()
             {
-                Id = 30, Title = "Movie30", Description = "Description30 for Movie30 that was released in 1969",
+                Id = 30, Title = "Echoes of 1969",
+                Description = "1969: A year of echoes from the past and whispers of the future, bridging two eras.",
                 Year = 1969, Rating = 5, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 31, Title = "Movie31", Description = "Description31 for Movie31 that was released in 1956",
+                Id = 31, Title = "Crescendo of Dreams",
+                Description =
+                    "1956: The crescendo of dreams that rose and fell, echoing through the corridors of time.",
                 Year = 1956, Rating = 10, CategoryId = 6
             },
-            new Movie
+            new()
             {
-                Id = 32, Title = "Movie32", Description = "Description32 for Movie32 that was released in 1964",
+                Id = 32, Title = "Shadows of the Past",
+                Description =
+                    "1964: Navigating through the shadows of the past, unveiling stories of love, loss, and legacy.",
                 Year = 1964, Rating = 9, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 33, Title = "Movie33", Description = "Description33 for Movie33 that was released in 1987",
+                Id = 33, Title = "Through the Looking Glass",
+                Description =
+                    "1987: A journey through the looking glass, exploring the year with curiosity and courage.",
                 Year = 1987, Rating = 5, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 34, Title = "Movie34", Description = "Description34 for Movie34 that was released in 2013",
+                Id = 34, Title = "Whispers of the Heart",
+                Description = "2013: A tale of whispers from the heart, weaving stories of love, loss, and hope.",
                 Year = 2013, Rating = 6, CategoryId = 5
             },
-            new Movie
+            new()
             {
-                Id = 35, Title = "Movie35", Description = "Description35 for Movie35 that was released in 2007",
+                Id = 35, Title = "Reflections of 2007",
+                Description =
+                    "2007: Reflecting on a year of significant changes, marked by personal growth and global shifts.",
                 Year = 2007, Rating = 4, CategoryId = 3
             },
-            new Movie
+            new()
             {
-                Id = 36, Title = "Movie36", Description = "Description36 for Movie36 that was released in 2020",
+                Id = 36, Title = "The Horizon Beyond",
+                Description =
+                    "2020: Gazing into the horizon beyond, exploring the uncertainties and possibilities of a new era.",
                 Year = 2020, Rating = 2, CategoryId = 6
             },
-            new Movie
+            new()
             {
-                Id = 37, Title = "Movie37", Description = "Description37 for Movie37 that was released in 1961",
+                Id = 37, Title = "Tales from 1961",
+                Description = "1961: Tales from a year of transition, capturing the essence of a world in motion.",
                 Year = 1961, Rating = 4, CategoryId = 7
             },
-            new Movie
+            new()
             {
-                Id = 38, Title = "Movie38", Description = "Description38 for Movie38 that was released in 1966",
+                Id = 38, Title = "Echoes of 1966",
+                Description =
+                    "1966: The echoes of change that resonated throughout the year, marking a period of transformation.",
                 Year = 1966, Rating = 5, CategoryId = 1
             },
-            new Movie
+            new()
             {
-                Id = 39, Title = "Movie39", Description = "Description39 for Movie39 that was released in 1961",
+                Id = 39, Title = "The Whispering Year",
+                Description =
+                    "1961: Remembered as the whispering year, its subtle changes influencing decades to come.",
                 Year = 1961, Rating = 3, CategoryId = 8
             },
-            new Movie
+            new()
             {
-                Id = 40, Title = "Movie40", Description = "Description40 for Movie40 that was released in 2007",
+                Id = 40, Title = "Memories of 2007",
+                Description =
+                    "2007: A collection of memories, both bitter and sweet, defining a year of growth and challenge.",
                 Year = 2007, Rating = 5, CategoryId = 3
             }
         };

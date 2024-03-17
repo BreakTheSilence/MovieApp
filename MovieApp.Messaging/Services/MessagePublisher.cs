@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Text.Json.Serialization;
 using Domain;
 using Domain.DTO;
 using Domain.Models;
@@ -19,6 +18,30 @@ public class MessagePublisher : IMessagePublisher
     public MessagePublisher(IRabbitMqConfiguration rabbitMqConfiguration)
     {
         _rabbitMqConfiguration = rabbitMqConfiguration;
+    }
+
+    public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+    {
+        var response = await PublishRequest(Enums.RequestType.GetAllMovies.ToString());
+        var serialized = JsonConvert.DeserializeObject<IEnumerable<MovieDto>>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
+    }
+
+    public async Task<MovieDetailsDto> GetMovieDetailsAsync(int movieId)
+    {
+        var response = await PublishRequest(Enums.RequestType.GetMovieDetails.ToString(), movieId);
+        var serialized = JsonConvert.DeserializeObject<MovieDetailsDto>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
+    }
+
+    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+    {
+        var response = await PublishRequest(Enums.RequestType.GetCategories.ToString());
+        var serialized = JsonConvert.DeserializeObject<IEnumerable<Category>>(response);
+        if (serialized is null) throw new ArgumentException("Could not serialize response");
+        return serialized;
     }
 
     private async Task<string> PublishRequest(string request, int parameter = -1)
@@ -50,35 +73,11 @@ public class MessagePublisher : IMessagePublisher
 
         var messageBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(parameter));
         channel.BasicPublish(
-            exchange: "",
-            routingKey: request,
-            basicProperties: properties,
-            body: messageBytes);
+            "",
+            request,
+            properties,
+            messageBytes);
 
         return await tcs.Task;
-    }
-
-    public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
-    {
-        var response = await PublishRequest(Enums.RequestType.GetAllMovies.ToString());
-        var serialized = JsonConvert.DeserializeObject<IEnumerable<MovieDto>>(response);
-        if (serialized is null) throw new ArgumentException("Could not serialize response");
-        return serialized;
-    }
-
-    public async Task<MovieDetailsDto> GetMovieDetailsAsync(int movieId)
-    {
-        var response = await PublishRequest(Enums.RequestType.GetMovieDetails.ToString(), movieId);
-        var serialized = JsonConvert.DeserializeObject<MovieDetailsDto>(response);
-        if (serialized is null) throw new ArgumentException("Could not serialize response");
-        return serialized;
-    }
-
-    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
-    {
-        var response = await PublishRequest(Enums.RequestType.GetCategories.ToString());
-        var serialized = JsonConvert.DeserializeObject<IEnumerable<Category>>(response);
-        if (serialized is null) throw new ArgumentException("Could not serialize response");
-        return serialized;
     }
 }
